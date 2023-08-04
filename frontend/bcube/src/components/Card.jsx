@@ -150,7 +150,7 @@ saveChanges(element)
     const {showFulltitle,showFullDescription,showDeleteConfirmation,showEditConfirm,videoUrl, videoTitle,videoDesc}=this.state
     const displayTitle=showFulltitle?element.Title: element.Title.substring(0, 8) 
     const showDescription=showFullDescription?element.description:element.description.substring(0,15)
-    console.log(encryptedVideoId);
+    console.log(encrypted);
    
     return (
       

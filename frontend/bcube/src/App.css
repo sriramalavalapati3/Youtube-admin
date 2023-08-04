@@ -1,0 +1,24 @@
+
+
+
+.App {
+  text-align: center;
+  height: 100vh;
+  overflow: hidden;
+}
+
+#cont1 {
+  display: flex;
+  
+  overflow: auto;
+  background-color: aliceblue;
+
+}
+
+#cont1 #loginForm{
+  margin-left: 700px;
+}
+
+#Nav{
+height:150px
+}

@@ -1,0 +1,43 @@
+#upload{
+    width:180px;
+    color:white;
+    background-color: rgb(73, 130, 227);
+    height:40px;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    cursor: pointer;
+}
+
+#Dashboard{
+  width:180px;
+  color:white;
+  background-color: rgb(73, 130, 227);
+  height:40px;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  cursor: pointer;
+}
+
+#Dashboard:hover{
+  background-color: rgba(73, 130, 227, 0.8);
+}
+
+#upload:hover {
+    background-color: rgba(73, 130, 227, 0.8);
+  }
+
+  .s-cont{
+    width: 15%;
+  background-color: rgb(194, 221, 245);
+  height: 100vh; /* Adjust the height as needed */
+  overflow-y: auto;
+  position: fixed;
+  top: 150px; /* Height of the navbar */
+  left: 0;
+  }
+
+  

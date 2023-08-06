@@ -20,6 +20,8 @@ const mapStateToProps=(state)=>{
          email:"",
          password:"",
          showpassword:false,
+         emailError: '',
+        //  passwordError: '',
       }
       this.emailChange=this.emailChange.bind(this);
       this.passwordChange=this.passwordChange.bind(this);
@@ -27,9 +29,22 @@ const mapStateToProps=(state)=>{
       this.toggleShowPassword=this.toggleShowPassword.bind(this)
     }
 
+    validateEmail(email) {
+      const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+      return emailPattern.test(email);
+    }
+  
+    validatePassword(password) {
+      const passwordPattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@\-_])[A-Za-z\d@\-_]{8,}$/;
+      return passwordPattern.test(password);
+    }
+
     emailChange(e){
+      const email = e.target.value;
+     
  this.setState({
-    email:e.target.value
+    email,
+    emailError:this.validateEmail(email) ? '' : '*Invalid email id',
  })
     }
     passwordChange(e){
@@ -67,7 +82,7 @@ console.log(isError)
 
 
   render() {
-const {email,password,showpassword}=this.state
+const {email,password,showpassword,emailError}=this.state
 const {isError}=this.props
     return (
       
@@ -76,6 +91,7 @@ const {isError}=this.props
             <img src="https://w7.pngwing.com/pngs/429/434/png-transparent-computer-icons-icon-design-business-administration-admin-icon-hand-monochrome-silhouette-thumbnail.png" alt="" />
            <h1>Login Form</h1>
         <form action="" id="formcontainer" onSubmit={this.onSubmit}>
+        <span className="emailerror">{emailError}</span>
             <label htmlFor="email">*Email</label>
         <input type="text" id="email" onChange={this.emailChange} placeholder='enter ur email' value={email} required/><br />
         <label htmlFor="password">*Password</label>

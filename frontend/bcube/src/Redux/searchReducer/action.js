@@ -13,7 +13,7 @@ axios.get(`http://localhost:8080/api/Search?search=${searchInput}`,{
     headers: {
       'Authorization': `Basic ${token}` 
     }}).then((res)=>
-    { const video = res.data.data;dispatch({type:SEARCH_REQUEST_SUCCESS,payload:video});dispatch({type:GET_SEARCH_VIDEO,payload:video})})
+    { dispatch({type:SEARCH_REQUEST_SUCCESS,payload:res.data});dispatch({type:GET_SEARCH_VIDEO,payload:res.data})})
     .catch((err)=>{dispatch({type:SEARCH_REQUEST_FAILURE})})
 
     

@@ -21,6 +21,16 @@ const mapStateToProps = (state) => {
 
 class Container2 extends Component {
 
+  constructor(props) {
+    super(props)
+  
+    this.state = {
+       page:0,
+    }
+
+    this.handlePreviousPage=this.handlePreviousPage.bind(this)
+    this.handleNextPage=this.handleNextPage.bind(this)
+  }
 
   componentDidMount() {
     const token = sessionStorage.getItem("token")
@@ -45,11 +55,23 @@ class Container2 extends Component {
 
   }
 
+  handlePreviousPage(){
+    this.setState((prevState) => ({
+      page: prevState.page - 1,
+    }));
+  }
 
+  handleNextPage(){
+    this.setState((prevState) => ({
+      page: prevState.page + 1,
+    }));
+  }
 
   render() {
     const { videos, isLogin, loginForm, isSuccess } = this.props
-    const token = sessionStorage.getItem("token")
+    const token = sessionStorage.getItem("token");
+    const {page}=this.state
+    const totalPages=videos.length
     if (!token) {
       if (!loginForm) {
         return <div className="centered-message"><h1>Please Login to Your Account</h1></div>
@@ -70,8 +92,18 @@ class Container2 extends Component {
 
 
       <div className='cnt-2'>
-        {videos.map((ele) => <Card key={ele.id} element={ele} />
-        )}
+         {videos[page]&&videos[page].data.map((video) => (
+          <Card key={video._id} element={video}/>
+        ))}
+         <div className="pagination-controls">
+          <button onClick={this.handlePreviousPage} disabled={page === 0}>
+            Previous
+          </button>
+          <span>Page {page + 1} of {totalPages}</span>
+          <button onClick={this.handleNextPage} disabled={page === totalPages - 1}>
+            Next
+          </button>
+        </div>
       </div>
     )
   }

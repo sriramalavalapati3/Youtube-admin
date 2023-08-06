@@ -15,7 +15,8 @@ const mapStateToProps=(state)=>{
  
 return{
     isLoading:state.deleteReducer.isLoading,
-    isError:state.deleteReducer.isError
+    isError:state.deleteReducer.isError,
+    videos: state.videoReducer.videos
 }
 }
 
@@ -55,12 +56,15 @@ generateEncryptedId(originalVideoId) {
 
 ondeletebyid(element){
     const { _id } = element;
+    const {videos,page}=this.props;
+    let index=page-1
     const token=sessionStorage.getItem("token")
     console.log(element)
      this.props.deleteVideo({_id,token})
      this.setState({
       showDeleteConfirmation:false
      })
+    
    }
 
 toggleTitle(){
@@ -150,7 +154,7 @@ saveChanges(element)
     const {showFulltitle,showFullDescription,showDeleteConfirmation,showEditConfirm,videoUrl, videoTitle,videoDesc}=this.state
     const displayTitle=showFulltitle?element.Title: element.Title.substring(0, 8) 
     const showDescription=showFullDescription?element.description:element.description.substring(0,15)
-    console.log(encrypted);
+    console.log("encrypted");
    
     return (
       

@@ -8,7 +8,7 @@ const { client } = require("./Redis/redis");
 
 const delById = async function ({ id, req }) {
   try {
-    console.log(req.body.user);
+   
     const post = await videomodel.findOne({ _id: id });
     if (post.userID === req.body.user.userID) {
       const data = await videomodel.findByIdAndDelete({ _id: id });
@@ -23,13 +23,31 @@ const delById = async function ({ id, req }) {
 
 
 const getData = async function (obj) {
+  const userID = obj.user.userID;
   try {
-    const userID = obj.user.userID;
+  
     let data = await videomodel.find({ userID });
     data = data.sort((a, b) => {
       return b.createdAt - a.createdAt;
     });
-    return data;
+
+    let arr=[];
+    let length=data.length;
+    let numOfPages=Math.ceil(length/6);
+    for(let i=1;i<=numOfPages;i++)
+    {
+      const startIndex = (i - 1) * 6;
+      const endIndex = startIndex + 6;
+    
+      const paginatedData = data.slice(startIndex, endIndex);
+      const obj={
+        page:i,
+        data:paginatedData
+      }
+    arr.push(obj)
+    }
+
+    return arr;
   } catch (error) {
     return error;
   }
@@ -60,7 +78,23 @@ const search = async function (title) {
   try {
     const regex = new RegExp(title, "i");
     const data = await videomodel.find({ Title: { $regex: regex } });
-    return data;
+    let arr=[];
+    let length=data.length;
+    let numOfPages=Math.ceil(length/6);
+    for(let i=1;i<=numOfPages;i++)
+    {
+      const startIndex = (i - 1) * 6;
+      const endIndex = startIndex + 6;
+    
+      const paginatedData = data.slice(startIndex, endIndex);
+      const obj={
+        page:i,
+        data:paginatedData
+      }
+    arr.push(obj)
+    }
+console.log(arr)
+    return arr
   } catch (error) {
     return error;
   }

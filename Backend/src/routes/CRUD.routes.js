@@ -1,22 +1,17 @@
 const express=require("express");
 const Joi = require("joi");
 const appRoute=express.Router();
-
+const { check, validationResult } = require('express-validator');
 const {delById,getData,getDataById,search,patchDataById,upload}=require("../transaction")
 
-const uploadSchema = Joi.object({
-    Title: Joi.string().max(20).required(),
-    video: Joi.string().required(),
-    description:Joi.string().required(),
-    user:Joi.object().required()
-  });
+const dataSchema = [
+    check('Title').isString().withMessage('Title must be a string').isLength({ max: 20 }).withMessage('Title should not exceed 20 characters').notEmpty().withMessage('Title is required'),
+    check('video').isString().withMessage('Video URL must be a string').notEmpty().withMessage('Video URL is required'),
+    check('description').isString().withMessage('Description must be a string').notEmpty().withMessage('Description is required'),
+    check('user').isObject().withMessage('User must be an object').notEmpty().withMessage('User is required')
+  ];
 
-const editSchema=Joi.object({
-    Title: Joi.string().max(20),
-    video: Joi.string(),
-    description:Joi.string(),
-    user:Joi.object().required()
-})
+
 
 
 //delete by id
@@ -42,12 +37,12 @@ appRoute.delete("/delete/:id",async(req,res)=>{
 
 appRoute.get("/data",async(req,res)=>{
     try {
-       const Data= await getData(req.body)
-     if(!Data)
+       const arr= await getData(req.body)
+     if(!arr)
      {
        return res.status(404).send({"msg":"fetched data Sucessfully","Data":[error.message]})
      }
-     res.status(200).send({"msg":"fetched data Sucessfully","Data":Data})  
+     res.status(200).send(arr)  
     } catch (error) {
         res.status(404).send({"msg":error.message})
     }
@@ -73,10 +68,11 @@ appRoute.get("/data/:id",async(req,res)=>{
 // code for search functionality using query
 
 appRoute.get("/Search",async(req,res)=>{
+    const title=req.query.search;
     try {
-        const title=req.query.search;
-        const data=await search(title)
-        res.status(200).send({data})
+       
+        const arr=await search(title)
+        res.status(200).send(arr)
     } catch (error) {
         res.status(404).send({"msg":error.message})
     }
@@ -84,15 +80,15 @@ appRoute.get("/Search",async(req,res)=>{
 
 //update by id 
 
-appRoute.patch("/update/:id",async(req,res)=>{
+appRoute.patch("/update/:id",dataSchema,async(req,res)=>{
     try {
           const id=req.params.id
           if(id)
           {
-            const {error}=editSchema.validate(req.body)
-            if (error) {
-                return res.status(400).send({ msg: error.details[0].message });
-              }
+            const errors = validationResult(req);
+            if (!errors.isEmpty()) {
+              return res.status(400).json({ errors: errors.array() });
+            }
               const data1=req.body
               const data= await patchDataById({id,data1})
             return  res.status(200).send({"msg":"updated succesfully","Data":data})
@@ -106,13 +102,13 @@ appRoute.patch("/update/:id",async(req,res)=>{
 
 //code for upload process  
 
-appRoute.post("/upload",async(req,res)=>{
+appRoute.post("/upload",dataSchema,async(req,res)=>{
     try {
        
-        const {error}=uploadSchema.validate(req.body)
-        if (error) {
-            return res.status(400).send({ msg: error.details[0].message });
-          }
+        const errors = validationResult(req);
+        if (!errors.isEmpty()) {
+          return res.status(400).json({ errors: errors.array() });
+        }
        const data=await upload(req.body)
         res.status(200).send({"msg":"uploaded Sucessfully"})
     } catch (error) {

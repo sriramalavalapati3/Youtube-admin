@@ -6,7 +6,7 @@ const verifyAsync = promisify(jwt.verify);
 const auth = async (req, res, next) => {
   try {
     const token = req.headers.authorization.split(" ")[1];
-
+     console.log(token)
       if(token)
       {
         const decoded = await verifyAsync(token, process.env.secret);

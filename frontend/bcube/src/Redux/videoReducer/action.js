@@ -10,8 +10,8 @@ export const getVideo=(obj)=>(dispatch)=>{
         headers: {
           'Authorization': `Basic ${token}` 
         }}).then((res)=>
-    { const videos = res.data.Data;console.log(res);dispatch({type:GET_VIDEO_SUCCESS,payload:res.data.Data});})
-    .catch((err)=>{dispatch({type:GET_VIDEO_FAILURE})})
+    { dispatch({type:GET_VIDEO_SUCCESS,payload:res.data});})
+   .catch((err)=>{dispatch({type:GET_VIDEO_FAILURE})})
 
 
     

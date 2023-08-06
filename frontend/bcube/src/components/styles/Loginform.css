@@ -50,3 +50,7 @@ border-radius: 50%;
 #password input{
     width:10px
 }
+
+.emailerror{
+    color: red;
+}

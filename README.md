@@ -43,3 +43,7 @@ The `videoSchema` defines the structure of the Video model.
 - `userID` (String): The user ID associated with the video.
 
 
+# PostMan Hit Points
+
+Please explore for better understanding of Api Hit points [Docs](https://documenter.getpostman.com/view/24325307/2s9XxzsrYF)
+

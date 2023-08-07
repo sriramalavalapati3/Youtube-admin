@@ -90,7 +90,7 @@ Overview
 After completing the form, the admin can submit the data.upon succesfull data rendering it will redirect to dashboard
 
 # Data Processing: 
-The submitted data is processed, and a new card is generated on the dashboard with the entered details.
+The submitted data is processed, and a new card is generated on the dashboard with the entered details .
 
 # Conclusion
 

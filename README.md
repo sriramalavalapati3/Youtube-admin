@@ -47,3 +47,52 @@ The `videoSchema` defines the structure of the Video model.
 
 Please explore for better understanding of Api Hit points [Docs](https://documenter.getpostman.com/view/24325307/2s9XxzsrYF)
 
+
+# ReactJs Frontend
+bcube is Project of Admin Pannel interface
+
+# Login and Dashboard
+Login Page: To access CRUD operations, the admin must log in. On launching the application, the user is directed to the login page where they enter their credentials.
+
+# Authentication:
+Upon successful authentication, the admin is granted access to the dashboard.
+
+# Dashboard Page:
+The dashboard is the central interface for performing CRUD operations. It consists of card components, each displaying details of an element.
+
+# Card Component: 
+Each card displays information about an element. The following details are shown:
+
+# Video Thumbnail
+ Description
+Overview
+Delete Button
+Edit Button
+Edit and Delete Actions:
+
+Edit: Clicking the "Edit" button on a card opens a dialogue box.
+Edit Dialogue Box: The admin can make changes to the details (video, description, overview) and confirm the edit.
+Save Edit: Upon clicking the "Edit" button in the dialogue, the changes are saved and the card updates.
+Delete: Clicking the "Delete" button prompts a dialogue box.
+Delete Dialogue Box: The admin is asked if they're sure they want to delete the element.
+Confirm Delete: If the admin confirms deletion, the element is removed from the dashboard.
+Upload Section
+# Upload Page:
+Besides the dashboard, the application also features an upload section for adding new elements.
+
+# Upload Form:
+In the upload section, there is an upload form where the admin can input the following details:
+
+Video
+Description
+Overview
+# Submit Upload:
+After completing the form, the admin can submit the data.upon succesfull data rendering it will redirect to dashboard
+
+# Data Processing: 
+The submitted data is processed, and a new card is generated on the dashboard with the entered details.
+
+# Conclusion
+
+This README provides a high-level overview of the frontend flow for CRUD operations in the application. By following this flow, the admin can seamlessly log in, manage elements using the dashboard's card components, edit existing elements, delete elements with confirmation, and upload new elements using the upload form.
+

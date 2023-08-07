@@ -5,7 +5,6 @@ This is Bcube admin Pannel , we can able to perform crud operations, DELETE , PO
 
 
 # ROUTES
--------------------------------------------------------------------------------------
-|                  |                  |                                              |
---------------------------------------------------------------------------------------
-
+| Method | Endpoint    | Description                 | Authentication | Status Code |
+|--------|-------------|-----------------------------|----------------|-------------|
+| GET    | `/api/data` | Retrieve data              | Required       | 200         |

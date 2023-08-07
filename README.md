@@ -96,3 +96,11 @@ The submitted data is processed, and a new card is generated on the dashboard wi
 
 This README provides a high-level overview of the frontend flow for CRUD operations in the application. By following this flow, the admin can seamlessly log in, manage elements using the dashboard's card components, edit existing elements, delete elements with confirmation, and upload new elements using the upload form.
 
+
+## Errors should be resolved in near future
+:- getting error in connecting mongo-compass to appilication when i dockerise the application , If any one had solution please make it or i will make myself soon .
+
+
+# Thank You
+ 
+

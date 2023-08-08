@@ -5,7 +5,9 @@
 
 ## Description
 This is Bcube admin Pannel , we can able to perform crud operations, DELETE , POST,PATCH, GET, GETBYID.
-
+### How to get started with this Application 
+### Lets starts by cloning 
+``git clone https://github.com/sriramalavalapati3/Myanatomy-Initial-project.git``
 
 # API HIT ROUTES
 | Method | Endpoint    | Description                 | Authentication | Status Code |

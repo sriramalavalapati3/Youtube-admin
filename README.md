@@ -9,6 +9,20 @@ This is Bcube admin Pannel , we can able to perform crud operations, DELETE , PO
 ### Lets starts by cloning 
 ``git clone https://github.com/sriramalavalapati3/Myanatomy-Initial-project.git``
 
+### aFter dowloading locally start the react app with command . bcube is foldername 
+``npm start``
+
+### connect the data base as your wish like mongoDB atlas , compass
+
+### start the backend with command
+``npm start``
+
+### After starting the server. register ur credentials like (username,email,password) use postman or Thunder client as Your wish 
+Hit this api to register by passing above details ``http://localhost8080/api/register``
+
+
+### After the login from frontend perform crud operations.
+
 # API HIT ROUTES
 | Method | Endpoint    | Description                 | Authentication | Status Code |
 |--------|-------------|-----------------------------|----------------|-------------|

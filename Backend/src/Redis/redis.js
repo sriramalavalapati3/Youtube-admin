@@ -2,9 +2,9 @@
 // const { createClient } =require('redis') ;
 
 // const client = createClient({
-//     password: 'a5s5JZt8aQSbTDBUbOXtk6L6v1Pv2dRm',
+//     password: '',
 //     socket: {
-//         host: 'redis-19854.c305.ap-south-1-1.ec2.cloud.redislabs.com',
+//         host: '',
 //         port: 19854
 //     }
 // });

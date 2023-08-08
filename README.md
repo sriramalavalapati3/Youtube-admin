@@ -17,7 +17,7 @@ This is Bcube admin Pannel , we can able to perform crud operations, DELETE , PO
 ### start the backend with command
 ``npm start``
 
-### After starting the server. register ur credentials like (username,email,password) use postman or Thunder client as Your wish in json format like this 
+### After starting the server. register ur credentials like (username,email,password) use postman or Thunder client as Your wish. Use json format like this in body
 ``{
 "username":"Your username" ,
 "email":"Your email",

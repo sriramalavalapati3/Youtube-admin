@@ -10,6 +10,7 @@ const auth = async (req, res, next) => {
       if(token)
       {
         const decoded = await verifyAsync(token, process.env.secret);
+        console.log(decoded)
         req.body.user = decoded;
         next();
       }else{

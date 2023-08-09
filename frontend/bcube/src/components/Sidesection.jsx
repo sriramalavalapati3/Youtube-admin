@@ -7,14 +7,19 @@ import { Link } from 'react-router-dom';
 class Sidesection extends Component {
 
     render(){
+        const token = sessionStorage.getItem('token'); // Example: You need to replace this with your actual token check
+
+        
+
         return (
             <div className='s-cont'>
-                <Link to="/Dashboard">
+                { token && <Link to="/Dashboard">
                     <div id="Dashboard"><LuLayoutDashboard/>Dashboard</div>
-                </Link>
-                <Link to="/upload">
+                </Link> }
+               { token &&<Link to="/upload">
                 <div id="upload"><AiOutlineCloudUpload/>upload</div>
                 </Link>
+    }
                
             </div>
           )

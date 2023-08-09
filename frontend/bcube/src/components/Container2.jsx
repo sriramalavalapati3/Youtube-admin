@@ -12,7 +12,8 @@ const mapStateToProps = (state) => {
     deleteStatus: state.deleteReducer.status,
     editStatus: state.updateReducer.status,
     isLogin: state.loginReducer.isLogin,
-    isSuccess: state.videoReducer.isSuccess
+    isSuccess: state.videoReducer.isSuccess,
+    video:state.updateReducer.video
   };
 };
 
@@ -49,9 +50,9 @@ class Container2 extends Component {
     if (token && prevProps.deleteStatus !== this.props.deleteStatus) {
       this.props.getVideo({ token });
     }
-    if (token && prevProps.editStatus !== this.props.editStatus) {
-      this.props.getVideo({ token })
-    }
+    // if (token && prevProps.editStatus !== this.props.editStatus) {
+    //   this.props.getVideo({ token })
+    // }
 
   }
 
@@ -93,7 +94,7 @@ class Container2 extends Component {
 
       <div className='cnt-2'>
          {videos[page]&&videos[page].data.map((video) => (
-          <Card key={video._id} element={video}/>
+          <Card key={video._id} element={video} page={page}/>
         ))}
          <div className="pagination-controls">
           <button onClick={this.handlePreviousPage} disabled={page === 0}>

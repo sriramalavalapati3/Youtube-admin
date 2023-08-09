@@ -151,7 +151,7 @@ This README provides a high-level overview of the frontend flow for CRUD operati
 ![Alt Text](https://drive.google.com/uc?export=download&id=1JHHqzi3NMOW7ChoWAupnK8EE6bChVrX1)
 
 
-# Thank You😊
+# Thank You😁
 ![SadEyesGIF](https://github.com/sriramalavalapati3/Myanatomy-Initial-project/assets/112754538/468d86fb-38ea-46c7-94dc-60a8cb7e4362)
 
 

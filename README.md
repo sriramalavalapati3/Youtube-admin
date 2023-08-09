@@ -134,11 +134,11 @@ This README provides a high-level overview of the frontend flow for CRUD operati
 
 ![Alt Text](https://drive.google.com/uc?export=download&id=1I3_hnBqahsFVmF7gTBA3us8xwYvcwFJb)
 
-## After Login I You Uploaded the videos Ui Look Like this 
+## After Login in If You Uploaded the videos Ui Look Like this 
 
 ![Alt Text](https://drive.google.com/uc?export=download&id=1i1VvhPt0KcxQhndA1WwM71OqQmpBDzVS)
 
-## Upload form when we click on Upload in sideSection
+## Upload form when we click on Upload in sideSection (Note: While uploading the Video If You are using Youtube links use embedded Links like this ``https://www.youtube.com/embed/yGyj0mSfVuk`` )
 
 ![Alt Text](https://drive.google.com/uc?export=download&id=1sSf3Gn7f8ZepT045RjISWyVYo37mVFWO)
 

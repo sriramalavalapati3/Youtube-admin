@@ -3,7 +3,7 @@
 # Myanatomy-Initial-project
 
 ## Description
-This is Bcube admin Pannel , we can able to perform crud operations, DELETE , POST,PATCH, GET, GETBYID.
+This is Bcube admin Pannel , we can able to perform crud operations, DELETE , POST,PATCH, GET, GETBYID, and we can perform search by title.
 ### How to get started with this Application 
 ### Lets starts by cloning 
 ``git clone https://github.com/sriramalavalapati3/Myanatomy-Initial-project.git``

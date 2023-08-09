@@ -1,6 +1,5 @@
 ![Alt Text](https://drive.google.com/uc?export=download&id=1CyobKw-T6LQbv_hdRqAcgxSX-o689QuR)
 
-
 # Myanatomy-Initial-project
 
 ## Description
@@ -124,6 +123,32 @@ This README provides a high-level overview of the frontend flow for CRUD operati
 
 ## Errors should be resolved in near future
 :- getting error in connecting mongo-compass to appilication when i dockerise the application , If any one had solution please make it or i will make myself soon .
+
+# This is overview 
+
+## Interface with out login
+
+![Alt Text](https://drive.google.com/uc?export=download&id=1tNgdNl73_s4QXfA3Pb2Fnt6APUcRWIUE)
+
+## Admin Login form 
+
+![Alt Text](https://drive.google.com/uc?export=download&id=1I3_hnBqahsFVmF7gTBA3us8xwYvcwFJb)
+
+## After Login I You Uploaded the videos Ui Look Like this 
+
+![Alt Text](https://drive.google.com/uc?export=download&id=1i1VvhPt0KcxQhndA1WwM71OqQmpBDzVS)
+
+## Upload form when we click on Upload in sideSection
+
+![Alt Text](https://drive.google.com/uc?export=download&id=1sSf3Gn7f8ZepT045RjISWyVYo37mVFWO)
+
+## Edit dialog box if we click on edit button in any of component
+
+![Alt Text](https://drive.google.com/uc?export=download&id=15T5Ic10_Vv_OFt_GbCiLxJQo4TcGPah0)
+
+## Delete dialog box if we click on delete button in any of component
+
+![Alt Text](https://drive.google.com/uc?export=download&id=1JHHqzi3NMOW7ChoWAupnK8EE6bChVrX1)
 
 
 # Thank You😊

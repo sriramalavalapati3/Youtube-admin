@@ -3,11 +3,11 @@ import {EDIT_REQUEST,EDIT_REQUEST_SUCCESS,EDIT_REQUEST_FAILURE} from './actionty
 const initialstate={
     isLoading:false,
     isError:false,
-    status:false
-
+    status:false,
+    video:{}
 }
 
-export const reducer=(state=initialstate,{type})=>{
+export const reducer=(state=initialstate,{type,payload})=>{
     switch(type){
         case EDIT_REQUEST:
             return{
@@ -16,7 +16,8 @@ export const reducer=(state=initialstate,{type})=>{
         case EDIT_REQUEST_SUCCESS:
             return{
                 isLoading:false,
-                status:true
+                status:true,
+                video:payload
             }
         case EDIT_REQUEST_FAILURE:
             return{

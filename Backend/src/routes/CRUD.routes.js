@@ -8,7 +8,7 @@ const dataSchema = [
     check('Title').isString().withMessage('Title must be a string').isLength({ max: 20 }).withMessage('Title should not exceed 20 characters').notEmpty().withMessage('Title is required'),
     check('video').isString().withMessage('Video URL must be a string').notEmpty().withMessage('Video URL is required'),
     check('description').isString().withMessage('Description must be a string').notEmpty().withMessage('Description is required'),
-    check('user').isObject().withMessage('User must be an object').notEmpty().withMessage('User is required')
+    // check('user').isObject().withMessage('User must be an object').notEmpty().withMessage('User is required')
   ];
 
 
@@ -24,7 +24,7 @@ appRoute.delete("/delete/:id",async(req,res)=>{
          
           if(data.msg)
           {
-          return res.status(200).send({"message":data.message})
+          return res.status(200).send({"message":data.message,"data":data.Data})
           }
           console.log({"message":data.message})
           res.status(401).send({"message":data.message})

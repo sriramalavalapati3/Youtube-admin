@@ -110,4 +110,13 @@ cursor: pointer;
     cursor: pointer;
   }
 
+.Deletebox{
+height:70%;
+width:80%;
+margin: auto;
+}
 
+.Editbox{
+  width:100%;
+  height:100%;
+}

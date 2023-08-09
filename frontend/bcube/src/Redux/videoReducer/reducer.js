@@ -1,4 +1,4 @@
-import { GET_VIDEO_FAILURE, GET_VIDEO_REQUEST, GET_VIDEO_SUCCESS,GET_SEARCH_VIDEO } from "./actiontype";
+import { GET_VIDEO_FAILURE, GET_VIDEO_REQUEST, GET_VIDEO_SUCCESS,GET_SEARCH_VIDEO,EDIT_VIDEO_SUCCESS,DELETE_VIDEO_SUCCESS } from "./actiontype";
 
 
 const initialstate={
@@ -35,7 +35,27 @@ switch(type){
             isLoading:false,
             videos:payload
         }
-    
+    case EDIT_VIDEO_SUCCESS:
+        const {page,Data}=payload
+        const updatedVideos = [...state.videos];
+
+       
+        if (updatedVideos[page] && updatedVideos[page].data) {
+          const updatedPageData = updatedVideos[page].data.map((video) =>
+            video._id === Data._id ? Data : video
+          );
+      
+          updatedVideos[page].data = updatedPageData;
+        }
+      
+        return{
+            ...state,
+            isLoading:false,
+            videos:updatedVideos
+        }
+
+    case DELETE_VIDEO_SUCCESS:
+
         default:return state
 }
 }

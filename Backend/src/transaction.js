@@ -1,6 +1,8 @@
 const { videomodel } = require("../models/video.model");
 const { Adminmodel } = require("../models/Adminmodel");
 const bcrypt = require("bcrypt");
+
+const ObjectId = require('bson-objectid')
 const jwt = require("jsonwebtoken");
 require("dotenv").config();
 const { client } = require("./Redis/redis");
@@ -10,9 +12,9 @@ const delById = async function ({ id, req }) {
   try {
    
     const post = await videomodel.findOne({ _id: id });
-    if (post.userID === req.body.user.userID) {
+    if (post.userID == req.body.user.userID) {
       const data = await videomodel.findByIdAndDelete({ _id: id });
-      return { msg: true, message: "deleted successfully" };
+      return { msg: true, message: "deleted successfully" , 'Data':data };
     } else {
       return { msg: false, message: "unauthorized" };
     }
@@ -149,7 +151,7 @@ const login = async (obj) => {
   try {
     const { email, password } = obj;
     const user = await Adminmodel.findOne({ email });
-
+    console.log(user._id)
     if (user) {
       const isPasswordCorrect = await new Promise((resolve, reject) => {
         bcrypt.compare(password, user.password, function (err, result) {
@@ -162,7 +164,9 @@ const login = async (obj) => {
       });
 
       if (isPasswordCorrect) {
-        const token = await jwt.sign({ userID: user._id }, process.env.secret);
+       
+       
+        const token = await jwt.sign({ userID:user._id }, process.env.secret);
         const expiredToken = await jwt.sign(
           { userID: user._id },
           process.env.secret,

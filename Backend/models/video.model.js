@@ -14,7 +14,7 @@ const videoSchema=mongoose.Schema({
         type:String,
         required:true
     },
-    "userID":String
+    "userID":mongoose.Schema.Types.ObjectId
 },
 { 
     timestamps: true

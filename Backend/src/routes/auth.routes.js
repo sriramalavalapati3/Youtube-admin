@@ -1,23 +1,15 @@
-
-const express=require("express");
-require('dotenv').config();
+const express = require("express");
+require("dotenv").config();
 const Joi = require("joi");
-const authRoute=express.Router();
-const {register,login}=require("../transaction")
+const authRoute = express.Router();
+const { register, login } = require("../transaction");
+const { validationResult, body } = require("express-validator");
 
 const registerSchema = Joi.object({
-    username: Joi.string().max(20).required(),
-    email: Joi.string().max(30).required(),
-    password:Joi.string().required()
-  });
-
-const loginSchema=Joi.object({
-    email: Joi.string().required(),
-    password:Joi.string().required() 
-})
-
-
-
+  username: Joi.string().max(20).required(),
+  email: Joi.string().max(30).required(),
+  password: Joi.string().required(),
+});
 
 /**
  * @swagger
@@ -70,48 +62,56 @@ const loginSchema=Joi.object({
  *                 type: string
  */
 
-authRoute.post("/register",async(req,res)=>{
-    try {
-        const { error } = registerSchema.validate(req.body);
-        if (error) {
-          // Return 400 Bad Request with validation error details
-          return res.status(400).send({ msg: error.details[0].message });
-        }
-
-        let data=await register(req.body);
-        if(data.msg)
-        {
-return res.status(500).send({"msg":data})
-        }
-        res.status(200).send({"msg":"registered successfully"})
-    } catch (error) {
-        res.status(404).send({"msg":error.message})
+authRoute.post("/register", async (req, res) => {
+  try {
+    const { error } = registerSchema.validate(req.body);
+    if (error) {
+      // Return 400 Bad Request with validation error details
+      return res.status(400).send({ msg: error.details[0].message });
     }
-})
 
+    let data = await register(req.body);
+    if (data.msg) {
+      return res.status(500).send({ msg: data });
+    }
+    res.status(200).send({ msg: "registered successfully" });
+  } catch (error) {
+    res.status(404).send({ msg: error.message });
+  }
+});
 
-
-
-authRoute.post("/login",async(req,res)=>{
+authRoute.post(
+  "/login",
+  [
+    body("email").isEmail().withMessage("Invalid email").notEmpty(),
+    body("password").notEmpty().withMessage("Password is required"),
+  ],
+  async (req, res) => {
     try {
-        const { error } = loginSchema.validate(req.body);
-        if (error) {
-          // Return 400 Bad Request with validation error details
-          return res.status(400).send({ msg: error.details[0].message });
-        }
-      const data=await login(req.body)
-    
-      if(data.msg===false)
-      {
-          return res.status(401).send(data)
+      const errors = validationResult(req);
+      if (!errors.isEmpty()) {
+        return res.status(400).json({ errors: errors.array() });
       }
-      
-      res.cookie("token",data.Token,{httpOnly:true})
-      
-      res.status(200).send({msg:data.msg,message:data.message,"token":data.Token,'expiry':data.expiry})
-    } catch (error) {
-        return res.status(500).send({"msg":error.message})
-    }
-})
+      const data = await login(req.body);
 
-module.exports={authRoute}
+      if (data.msg === false) {
+        return res.status(401).send(data);
+      }
+
+      res.cookie("token", data.Token, { httpOnly: true });
+
+      res.status(200).send({
+        msg: data.msg,
+        message: data.message,
+        token: data.Token,
+        expiry: data.expiry,
+      });
+    } catch (error) {
+      return res.status(500).send({ msg: error.message });
+    }
+  }
+);
+
+authRoute.post;
+
+module.exports = { authRoute };

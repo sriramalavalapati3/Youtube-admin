@@ -2,7 +2,8 @@ import React, { Component } from 'react'
 
 import { connect } from 'react-redux';
 import Card from './Card'
-
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import { getVideo } from '../Redux/videoReducer/action'
 import './styles/Container2.css'
 const mapStateToProps = (state) => {
@@ -13,7 +14,10 @@ const mapStateToProps = (state) => {
     editStatus: state.updateReducer.status,
     isLogin: state.loginReducer.isLogin,
     isSuccess: state.videoReducer.isSuccess,
-    video:state.updateReducer.video
+    video: state.updateReducer.video,
+    searchVideos: state.searchReducer.searchVideos,
+    updateStatus: state.updateReducer.status,
+    isLoginError: state.loginReducer.isError
   };
 };
 
@@ -24,62 +28,187 @@ class Container2 extends Component {
 
   constructor(props) {
     super(props)
-  
+
     this.state = {
-       page:0,
+      page: 0,
+      Videos: [],
+      deleteStatusVideo: false,
+      editStatusVideo: false,
     }
 
-    this.handlePreviousPage=this.handlePreviousPage.bind(this)
-    this.handleNextPage=this.handleNextPage.bind(this)
+    this.handlePreviousPage = this.handlePreviousPage.bind(this)
+    this.handleNextPage = this.handleNextPage.bind(this)
+
   }
 
   componentDidMount() {
     const token = sessionStorage.getItem("token")
-    
+    const { page } = this.state
+
     if (token) {
-      this.props.getVideo({ token });
+
+      if (this.props.videos.length === 0) {
+        // Fetch data only if the data for the current page is not available
+        this.props.getVideo({ token, page });
+
+
+      }
+
+      if (this.props.videos.length !== 0) {
+        this.setState({ Videos: this.props.videos[page].data });
+      }
+
+
     }
+
   }
 
   componentDidUpdate(prevProps) {
+    const { page, deleteStatusVideo, editStatusVideo } = this.state;
+    const { isLogin, isLoginError } = this.props
     const token = sessionStorage.getItem("token")
+
+    if (!prevProps.isLogin && isLogin && token) {
+      toast.success('Login successful!', { autoClose: 3000 });
+    }
+
+
+
+
+
     if (token && prevProps.isLogin !== this.props.isLogin) {
-      console.log("hi")
-      this.props.getVideo({ token });
+
+      this.props.getVideo({ token, page });
+      this.setState({ Videos: this.props.videos })
     }
-    if (token && prevProps.deleteStatus !== this.props.deleteStatus) {
-      this.props.getVideo({ token });
-    }
+
     // if (token && prevProps.editStatus !== this.props.editStatus) {
     //   this.props.getVideo({ token })
     // }
+    if (prevProps.videos !== this.props.videos) {
+      this.setState((prevState) => ({
+        Videos: [...prevState.Videos, ...this.props.videos[page].data],
+      }));
+    }
+    if (prevProps.searchVideos !== this.props.searchVideos) {
+      this.setState((prevState) => ({
+        Videos: [...this.props.searchVideos],
+      }));
+    }
+    if (prevProps.updateStatus !== this.props.updateStatus) {
+      this.setState({
+        page: 0,
+        editStatusVideo: true
+      })
+
+      this.setState((prevState) => ({
+        Videos: [...this.props.videos[page].data],
+      }));
+
+
+      if (editStatusVideo) {
+        if (this.props.updateStatus === true) {
+
+
+          toast.success('edit successful!', {
+            autoClose: 3000, onClose: () => {
+              this.setState({
+                editStatusVideo: false
+              })
+            }
+          });
+        } else if (this.props.updateStatus === false) {
+          toast.error('edit unsuccesfull', {
+            autoClose: 3000, onClose: () => {
+              this.setState({
+                editStatusVideo: false
+              })
+            }
+          })
+        }
+      }
+    }
+
+    if (token && prevProps.deleteStatus !== this.props.deleteStatus) {
+      this.setState({
+        page: 0,
+        deleteStatusVideo: true
+      })
+      this.setState((prevState) => ({
+        Videos: [...this.props.videos[page].data],
+      }));
+
+      if (deleteStatusVideo) {
+        if (this.props.deleteStatus) {
+          toast.success('Delete successful!', {
+            autoClose: 3000, onClose: () => {
+              this.setState({
+                deleteStatusVideo: false
+              })
+            }
+          })
+        } else if (!this.props.deleteStatus) {
+          toast.error('Delete unsuccessful!', {
+            autoClose: 3000, onClose: () => {
+              this.setState({
+                deleteStatusVideo: false
+              })
+            }
+          })
+        }
+
+      }
+
+
+    }
+
 
   }
 
-  handlePreviousPage(){
+
+
+  handlePreviousPage() {
     this.setState((prevState) => ({
       page: prevState.page - 1,
     }));
   }
 
-  handleNextPage(){
-    this.setState((prevState) => ({
-      page: prevState.page + 1,
-    }));
+  handleNextPage() {
+
+    const token = sessionStorage.getItem("token");
+    const { page } = this.state;
+    const nextPage = page + 1;
+
+    this.setState({
+      page: nextPage,
+    })
+    this.props.getVideo({ token, page: nextPage });
+    ;
   }
+
+
+
+
 
   render() {
     const { videos, isLogin, loginForm, isSuccess } = this.props
+    const { page } = this.state
+
+
+    const { Videos } = this.state
+    console.log(Videos)
+
+    // const totalPages = videos.length
     const token = sessionStorage.getItem("token");
-    const {page}=this.state
-    const totalPages=videos.length
+
+
     if (!token) {
       if (!loginForm) {
         return <div className="centered-message"><h1>Please Login to Your Account</h1></div>
       }
 
     }
- 
+
     if (!token) {
       return null;
     }
@@ -93,18 +222,16 @@ class Container2 extends Component {
 
 
       <div className='cnt-2'>
-         {videos[page]&&videos[page].data.map((video) => (
-          <Card key={video._id} element={video} page={page}/>
+
+        {Videos.length !== 0 && Videos.map((video) => (
+          <Card key={video._id} element={video} page={page} />
         ))}
-         <div className="pagination-controls">
-          <button onClick={this.handlePreviousPage} disabled={page === 0}>
-            Previous
-          </button>
-          <span>Page {page + 1} of {totalPages}</span>
-          <button onClick={this.handleNextPage} disabled={page === totalPages - 1}>
-            Next
+        <div className="load-more-container">
+          <button className="load-more-button" onClick={this.handleNextPage}>
+            Load More
           </button>
         </div>
+        <ToastContainer position="bottom-right" />
       </div>
     )
   }

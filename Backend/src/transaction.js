@@ -2,19 +2,19 @@ const { videomodel } = require("../models/video.model");
 const { Adminmodel } = require("../models/Adminmodel");
 const bcrypt = require("bcrypt");
 
-const ObjectId = require('bson-objectid')
+const ObjectId = require("bson-objectid");
 const jwt = require("jsonwebtoken");
 require("dotenv").config();
 const { client } = require("./Redis/redis");
 //delete by id
 
-const delById = async function ({ id, req }) {
+const delById = async function ({ id, req,page }) {
   try {
-   
     const post = await videomodel.findOne({ _id: id });
+   
     if (post.userID == req.body.user.userID) {
       const data = await videomodel.findByIdAndDelete({ _id: id });
-      return { msg: true, message: "deleted successfully" , 'Data':data };
+      return { msg: true, message: "deleted successfully", Data: data ,"page":page };
     } else {
       return { msg: false, message: "unauthorized" };
     }
@@ -23,33 +23,34 @@ const delById = async function ({ id, req }) {
   }
 };
 
-
 const getData = async function (obj) {
-  const userID = obj.user.userID;
+  const { user, pageoffset, pageSize } = obj;
+  const userID = user.userID;
+
   try {
-  
-    let data = await videomodel.find({ userID });
-    data = data.sort((a, b) => {
-      return b.createdAt - a.createdAt;
-    });
-
-    let arr=[];
-    let length=data.length;
-    let numOfPages=Math.ceil(length/6);
-    for(let i=1;i<=numOfPages;i++)
-    {
-      const startIndex = (i - 1) * 6;
-      const endIndex = startIndex + 6;
     
-      const paginatedData = data.slice(startIndex, endIndex);
-      const obj={
-        page:i,
-        data:paginatedData
-      }
-    arr.push(obj)
-    }
+   // let data = await videomodel.find({ userID });
+     let data = await videomodel.find({ userID }).skip(pageSize * pageoffset).limit(pageSize);
+    // data = data.sort((a, b) => {
+    //   return b.createdAt - a.createdAt;
+    // });
 
-    return arr;
+    // let arr = [];
+    // let length = data.length;
+    // let numOfPages = Math.ceil(length / 6);
+    // for (let i = 1; i <= numOfPages; i++) {
+    //   const startIndex = (i - 1) * 6;
+    //   const endIndex = startIndex + 6;
+
+    //   const paginatedData = data.slice(startIndex, endIndex);
+    //   const obj = {
+    //     page: i,
+    //     data: paginatedData,
+    //   };
+    //   arr.push(obj);
+    // }
+
+    return {data,page:pageoffset};
   } catch (error) {
     return error;
   }
@@ -80,23 +81,22 @@ const search = async function (title) {
   try {
     const regex = new RegExp(title, "i");
     const data = await videomodel.find({ Title: { $regex: regex } });
-    let arr=[];
-    let length=data.length;
-    let numOfPages=Math.ceil(length/6);
-    for(let i=1;i<=numOfPages;i++)
-    {
-      const startIndex = (i - 1) * 6;
-      const endIndex = startIndex + 6;
-    
-      const paginatedData = data.slice(startIndex, endIndex);
-      const obj={
-        page:i,
-        data:paginatedData
-      }
-    arr.push(obj)
-    }
-console.log(arr)
-    return arr
+    // let arr = [];
+    // let length = data.length;
+    // let numOfPages = Math.ceil(length / 6);
+    // for (let i = 1; i <= numOfPages; i++) {
+    //   const startIndex = (i - 1) * 6;
+    //   const endIndex = startIndex + 6;
+
+    //   const paginatedData = data.slice(startIndex, endIndex);
+    //   const obj = {
+    //     page: i,
+    //     data: paginatedData,
+    //   };
+    //   arr.push(obj);
+    // }
+    // console.log(arr);
+    return data;
   } catch (error) {
     return error;
   }
@@ -151,7 +151,7 @@ const login = async (obj) => {
   try {
     const { email, password } = obj;
     const user = await Adminmodel.findOne({ email });
-    console.log(user._id)
+    console.log(user._id);
     if (user) {
       const isPasswordCorrect = await new Promise((resolve, reject) => {
         bcrypt.compare(password, user.password, function (err, result) {
@@ -164,9 +164,7 @@ const login = async (obj) => {
       });
 
       if (isPasswordCorrect) {
-       
-       
-        const token = await jwt.sign({ userID:user._id }, process.env.secret);
+        const token = await jwt.sign({ userID: user._id }, process.env.secret);
         const expiredToken = await jwt.sign(
           { userID: user._id },
           process.env.secret,
@@ -190,8 +188,6 @@ const login = async (obj) => {
     return { error: error.message };
   }
 };
-
-
 
 module.exports = {
   delById,

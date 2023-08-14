@@ -8,6 +8,9 @@ import Upload from './components/Upload';
 import { BrowserRouter as Router, Route,Routes } from 'react-router-dom';
 import Overview from './components/Overview';
 
+import { toast,ToastContainer  } from 'react-toastify';
+import { connect } from 'react-redux';
+
 import Loginform from './components/Loginform';
 
 
@@ -30,6 +33,7 @@ toggleLoginForm(){
   {
     sessionStorage.setItem("token","")
     window.location.href="/Dashboard"
+    toast.success('Login out successful!', { autoClose: 3000 })
     return;
   }
 
@@ -39,7 +43,6 @@ toggleLoginForm(){
   
  
 }
-
 
 
 
@@ -53,15 +56,17 @@ toggleLoginForm(){
        <Navbars toggleLoginForm={this.toggleLoginForm}/>
        <div id="cont1">
         <Sidesection/>
+       
         <Routes>
               {<Route path="/Dashboard" element={<Container2  loginForm={loginForm} toggleLoginForm={this.toggleLoginForm} />} />}
               {<Route path="/upload" element={<Upload  loginForm={loginForm}  />} />}
               { <Route path="/overview/:encryptedVideoId" element={<Overview/>}/> }
        </Routes>
        {this.state.loginForm && <Loginform toggleLoginForm={this.toggleLoginForm}  />}
-       
+       <ToastContainer position="bottom-right" />
        
        </div>
+      
        </div>
       </Router>
      
@@ -73,4 +78,5 @@ toggleLoginForm(){
 }
 
 
-export default App;
+
+export default App

@@ -11,7 +11,7 @@ import {
     const token = obj.token;
     const page = obj.page;
     const pageView = 6;
-  
+   console.log("Hi from redux")
     axios
       .get(
         `http://localhost:8080/api/data?pageoffset=${page}&pageSize=${pageView}`,

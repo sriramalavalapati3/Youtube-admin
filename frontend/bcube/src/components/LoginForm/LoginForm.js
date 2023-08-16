@@ -1,18 +1,13 @@
 import React, { Component } from "react";
-import { login } from "../Redux/Redux";
-import { connect } from "react-redux";
 
-import "./styles/Loginform.css";
+
+
+import "./LoginForm.css";
 import { withNavigateHook } from "./Navigate";
 
-const mapStateToProps = (state) => {
-  return {
-    isError: state.loginReducer.isError,
-    isLogin: state.loginReducer.isLogin,
-  };
-};
 
-class Loginform extends Component {
+
+class LoginForm extends Component {
   constructor(props) {
     super(props);
 
@@ -129,13 +124,6 @@ class Loginform extends Component {
   }
 }
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    login: (obj) => dispatch(login(obj)),
-  };
-};
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(withNavigateHook(Loginform));
+
+export default (withNavigateHook(LoginForm));

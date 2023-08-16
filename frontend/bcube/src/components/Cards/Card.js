@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import "./styles/Card.css";
-import { connect } from "react-redux";
+import "./Cards.css";
+
 import { LuEdit } from "react-icons/lu";
 import {
   Dialog,
@@ -12,7 +12,7 @@ import {
   TextField,
 } from "@mui/material";
 import { withStyles } from "@material-ui/core/styles";
-import { deleteVideo, editVideo,overviewVideo } from "../Redux/Redux";
+
 import { Link } from "react-router-dom";
 import { MdOutlineDeleteOutline } from "react-icons/md";
 import CryptoJS from "crypto-js";
@@ -38,13 +38,7 @@ const styles = (theme) => ({
   },
 });
 
-const mapStateToProps = (state) => {
-  return {
-    isLoading: state.deleteReducer.isLoading,
-    isError: state.deleteReducer.isError,
-    videos: state.videoReducer.videos,
-  };
-};
+
 
 class Card extends Component {
   constructor(props) {
@@ -316,21 +310,6 @@ class Card extends Component {
   }
 }
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    deleteVideo: (obj) => {
-      dispatch(deleteVideo(obj));
-    },
-    editVideo: (obj) => {
-      dispatch(editVideo(obj));
-    },
-    overviewVideo: (obj) => {
-      dispatch(overviewVideo(obj));
-    },
-  };
-};
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(withStyles(styles)(Card));
+
+export default(withStyles(styles)(Card));

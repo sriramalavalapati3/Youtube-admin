@@ -1,19 +1,24 @@
 
 import './App.css';
-import Navbars from './components/Navbars';
-import Container2 from './components/Container2';
-import Sidesection from './components/Sidesection';
+//import Navbars from './components/Navbars';
+//import Container2 from './components/Container2';
+//import Sidesection from './components/Sidesection';
 import { Component } from 'react';
-import Upload from './components/Upload';
+//import Upload from './components/Upload';
 import { BrowserRouter as Router, Route,Routes } from 'react-router-dom';
-import Overview from './components/Overview';
+//import Overview from './components/Overview';
 
 import { toast,ToastContainer  } from 'react-toastify';
 import { connect } from 'react-redux';
 
 import Loginform from './components/Loginform';
-// import Sidebar from './components/SideComponent/Sidebar';
-// import Dashboard from './components/Dashboard/Dashboard';
+import Dashboard from './components/Dashboard';
+ import Sidebar from './components/SideComponent/Sidebar';
+import Navbar from './components/Navbar';
+import UploadForm from './components/UploadForm';
+import Overview from './components/Overview';
+
+ //import Dashboard from './components/Dashboard';
 
 
 
@@ -55,17 +60,17 @@ toggleLoginForm(){
     return (
       <Router>
  <div className="App">
-       <Navbars toggleLoginForm={this.toggleLoginForm}/>
+       <Navbar  toggleLoginForm={this.toggleLoginForm}/>
        <div id="cont1">
-     <Sidesection/>
+     <Sidebar/>
        
         <Routes>
-              {<Route path="/Dashboard" element={<Container2 loginForm={loginForm} toggleLoginForm={this.toggleLoginForm}/>} />}
-              {<Route path="/upload" element={<Upload  loginForm={loginForm}  />} />}
+              {<Route path="/Dashboard" element={<Dashboard loginForm={loginForm} toggleLoginForm={this.toggleLoginForm}/>} />}
+              {<Route path="/upload" element={<UploadForm  loginForm={loginForm}  />} />}
               { <Route path="/overview/:encryptedVideoId" element={<Overview/>}/> }
        </Routes>
        {this.state.loginForm && <Loginform toggleLoginForm={this.toggleLoginForm}  />}
-       <ToastContainer position="bottom-right" />
+      
        
        </div>
       

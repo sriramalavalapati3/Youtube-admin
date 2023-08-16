@@ -1,0 +1,89 @@
+#uploadform {
+    width:80%;
+    height: 100vh;
+    margin-top: 160px; 
+    padding-left: 20%;
+    /* margin-left: 400px; */
+    background-color: rgb(14, 13, 13);
+    color:white
+  }
+  
+  form{
+    
+    width:500px;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    gap:5px;
+    margin:auto
+  }
+  
+  form input{
+    padding:10px 15px
+  }
+  
+  .upload-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 3px;
+    border: none;
+    padding: 10px 20px;
+    font-weight: 500;
+    cursor: pointer;
+    background-color: #e0e0e0;
+    color: #333;
+  }
+  
+  .upload-button.green {
+    background-color: green;
+    color: white;
+  }
+  
+  .upload-button.red {
+    background-color: red;
+    color: white;
+  }
+  
+  .upload-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 400px;
+  }
+  
+  .upload-form label {
+    font-size: 20px;
+  }
+  
+  .upload-form button[type="submit"] {
+    align-self:center;
+  }
+  
+  .upload-form button[type="submit"] svg {
+    margin-right: 5px;
+  }
+  
+  .upload-form .error-message {
+    color: red;
+    font-size: 14px;
+    text-align: center;
+  }
+  
+  #videodesc{
+    height:100px
+  }
+  
+  .upload-button {
+    /* Regular style for the upload button */
+    background-color: green;
+    color: white;
+    /* Add other styles as needed */
+  }
+  
+  .upload-button.upload-button-disabled {
+    
+    background-color: lightgreen;
+    cursor: not-allowed; 
+    opacity: 0.7;
+  }

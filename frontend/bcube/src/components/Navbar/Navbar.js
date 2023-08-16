@@ -1,20 +1,13 @@
 import React, { Component } from "react";
-import "./styles/Navbars.css";
-import { connect } from "react-redux";
-import { searchVideo } from "../Redux/Redux";
+import "./Navbar.css";
+
+
 import { AiOutlineUserAdd } from "react-icons/ai";
-import { withNavigateHook } from "./Navigate";
+import { withNavigateHook } from "../Navigate";
 
-const mapStateToProps = (state) => {
-  console.log(state);
-  return {
-    searchVideos: state.searchReducer.searchVideos,
-    isLoading: state.searchReducer.isLoading,
-    isLogin: state.loginReducer.isLogin,
-  };
-};
 
-class Navbars extends Component {
+
+class Navbar extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -82,13 +75,6 @@ class Navbars extends Component {
   }
 }
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    searchVideo: (obj) => dispatch(searchVideo(obj)),
-  };
-};
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(withNavigateHook(Navbars));
+
+export default(withNavigateHook(Navbar));

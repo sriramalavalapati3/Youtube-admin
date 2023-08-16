@@ -1,24 +1,15 @@
 import React, { Component } from "react";
-import { connect } from "react-redux";
-import { overviewVideo } from "../Redux/Redux";
+
 import { useParams } from "react-router-dom";
 import CryptoJS from "crypto-js";
 import "./styles/Overview.css";
-const mapStateToProps = (state) => {
-  return {
-    Video: state.overviewReducer.video,
-  };
-};
-
-const mapDispatchToProps = (dispatch) => {
-  return {
-    overviewVideo: (obj) => dispatch(overviewVideo(obj)),
-  };
-};
 
 
 
-class Overview extends Component {
+
+
+
+class OverView extends Component {
   componentDidMount() {
     const token = sessionStorage.getItem("token");
     let { encryptedVideoId } = this.props.params;
@@ -60,7 +51,4 @@ function withParams(Component) {
   return (props) => <Component {...props} params={useParams()} />;
 }
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(withParams(Overview));
+export default (withParams(OverView));

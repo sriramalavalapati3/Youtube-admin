@@ -1,10 +1,10 @@
 import React, { Component } from 'react'
 
 import { connect } from 'react-redux';
-import Card from './Card'
+import Card from './Cards'
 import { toast, ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
-import { getVideo } from '../Redux/videoReducer/action'
+
+import { getVideo } from '../Redux/Redux'
 import './styles/Container2.css'
 const mapStateToProps = (state) => {
   return {

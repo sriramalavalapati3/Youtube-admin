@@ -1,0 +1,42 @@
+.cnt-2 {
+  width:80%;
+  display:grid;
+  grid-template-columns: repeat(3,25%);
+  column-gap: 20px;
+  row-gap: 20px;
+  max-height: calc(100vh - 150px);
+  overflow-y: auto; /* Enable vertical scrolling */
+  margin-top: 150px; 
+  margin-left: 300px;
+ 
+  
+}
+
+.centered-message {
+  width:80%;
+  height: 100vh;
+  margin-top: 160px; 
+  padding-left: 20%; /* Adjust this value if you want the message to be centered within a specific height */
+}
+
+/* ::-webkit-scrollbar {
+  display:block;
+} */
+
+.load-more-container {
+display: flex;
+justify-content: center;
+align-items: center;
+margin: 20px 0;
+}
+
+.load-more-button {
+padding: 10px 20px;
+background-color: #007bff;
+color: white;
+border: none;
+border-radius: 5px;
+cursor: pointer;
+}
+
+

@@ -12,6 +12,8 @@ import { toast,ToastContainer  } from 'react-toastify';
 import { connect } from 'react-redux';
 
 import Loginform from './components/Loginform';
+// import Sidebar from './components/SideComponent/Sidebar';
+// import Dashboard from './components/Dashboard/Dashboard';
 
 
 
@@ -55,10 +57,10 @@ toggleLoginForm(){
  <div className="App">
        <Navbars toggleLoginForm={this.toggleLoginForm}/>
        <div id="cont1">
-        <Sidesection/>
+     <Sidesection/>
        
         <Routes>
-              {<Route path="/Dashboard" element={<Container2  loginForm={loginForm} toggleLoginForm={this.toggleLoginForm} />} />}
+              {<Route path="/Dashboard" element={<Container2 loginForm={loginForm} toggleLoginForm={this.toggleLoginForm}/>} />}
               {<Route path="/upload" element={<Upload  loginForm={loginForm}  />} />}
               { <Route path="/overview/:encryptedVideoId" element={<Overview/>}/> }
        </Routes>

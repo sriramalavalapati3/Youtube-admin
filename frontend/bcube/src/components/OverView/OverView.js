@@ -2,7 +2,7 @@ import React, { Component } from "react";
 
 import { useParams } from "react-router-dom";
 import CryptoJS from "crypto-js";
-import "./styles/Overview.css";
+import "./OverView.css";
 
 
 

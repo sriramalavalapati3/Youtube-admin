@@ -1,22 +1,19 @@
 import React, { Component } from "react";
 import { AiOutlineCloudUpload } from "react-icons/ai";
 import { LuLayoutDashboard } from "react-icons/lu";
-import "./styles/Sidesection.css";
+import "./Sidebar.css";
 import { Link } from "react-router-dom";
-import { connect } from "react-redux";
 
-const mapStateToProps = (state) => {
-  return {
-    login: state.loginReducer.isLogin,
-  };
-};
 
-class Sidesection extends Component {
+
+
+class Sidebar extends Component {
   render() {
     const token = sessionStorage.getItem("token"); // Example: You need to replace this with your actual token check
 
     const { login } = this.props;
-
+console.log("token",token);
+console.log("login",login)
     return (
       <div className="s-cont">
         {token || login ? (
@@ -39,4 +36,4 @@ class Sidesection extends Component {
     );
   }
 }
-export default connect(mapStateToProps)(Sidesection);
+export default Sidebar  ;

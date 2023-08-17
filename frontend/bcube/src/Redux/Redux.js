@@ -62,7 +62,7 @@ const initialstateLogin = {
     isError: false,
     isLoading: false,
     token: null,
-    isLogin: false,
+    isLogin: null,
   };  
  
   const initialstateDelete = {
@@ -236,6 +236,7 @@ export const reducerEdit = (state = initialStateEdit, { type, payload }) => {
           ...state,
           isLoading: false,
           isError: true,
+          isLogin: false
         };
   
       default:

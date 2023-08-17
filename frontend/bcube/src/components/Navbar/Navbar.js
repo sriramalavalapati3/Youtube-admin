@@ -34,11 +34,12 @@ class Navbar extends Component {
   componentDidMount() {
     // Add an event listener to reset the search input on browser back
     window.onpopstate = () => {
-      this.setState({ searchInput: "" });
+     
     };
   }
 
   redirect() {
+    this.setState({ searchInput: "" });
     this.props.navigation("/Dashboard");
   }
 

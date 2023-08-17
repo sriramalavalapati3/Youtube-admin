@@ -3,7 +3,7 @@ import React, { Component } from "react";
 
 
 import "./LoginForm.css";
-import { withNavigateHook } from "./Navigate";
+
 
 
 
@@ -126,4 +126,4 @@ class LoginForm extends Component {
 
 
 
-export default (withNavigateHook(LoginForm));
+export default LoginForm ;

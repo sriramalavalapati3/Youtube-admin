@@ -42,7 +42,7 @@ import './Container.css'
 
 componentDidUpdate(prevProps){
   const { page, deleteStatusVideo, editStatusVideo } = this.state;
-  const { isLogin, isLoginError } = this.props
+  const { isLogin } = this.props
   const token = sessionStorage.getItem("token")
 
   if (!prevProps.isLogin && isLogin && token) {

@@ -41,7 +41,7 @@ class UploadForm extends Component {
       });
 
       if (!isError) {
-        window.location.href = "/Dashboard";
+      this.props.navigation("/Dashboard")
       }
     }
   };

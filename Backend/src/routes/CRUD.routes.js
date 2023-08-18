@@ -2,7 +2,7 @@ const express = require("express");
 const Joi = require("joi");
 const appRoute = express.Router();
 const { check, validationResult } = require("express-validator");
-const {handleDelete,handleGetData,handleGetDataById,handlePatchData,handleDataUpload}=require('../controller')
+const {handleDelete,handleGetData,handleGetDataById,handlePatchData,handleDataUpload,handleSearch}=require('../controller')
 
 
 const dataSchema = [
@@ -36,7 +36,7 @@ appRoute.delete("/delete",handleDelete );
 
 //get data
 
-appRoute.get("/data",handleGetData );
+appRoute.get("/data", );
 
 // get data by id
 
@@ -44,7 +44,7 @@ appRoute.get("/data/:id",handleGetDataById );
 
 // code for search functionality using query
 
-appRoute.get("/Search",);
+appRoute.get("/Search",handleSearch);
 
 //update by id
 

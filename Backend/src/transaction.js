@@ -5,7 +5,7 @@ const bcrypt = require("bcrypt");
 const ObjectId = require("bson-objectid");
 const jwt = require("jsonwebtoken");
 require("dotenv").config();
-const { client } = require("./Redis/redis");
+//const { client } = require("./Redis/redis");
 //delete by id
 
 const delById = async function ({ id, req,page }) {

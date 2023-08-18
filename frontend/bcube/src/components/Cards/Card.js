@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import "./Cards.css";
-
+import {withErrorBoundary} from 'react-error-boundary'
 import { LuEdit } from "react-icons/lu";
 import {
   Dialog,

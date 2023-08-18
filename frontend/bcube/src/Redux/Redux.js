@@ -37,6 +37,7 @@ const initialState1 = {
   isLoading: false,
   videos: [],
   isSuccess: false,
+  statusCode:null
 };
 const initialStateUpload = {
     isError: false,
@@ -94,6 +95,7 @@ export const reducer1 = (state = initialState1, { type, payload }) => {
         ...state,
         isLoading: false,
         isError: true,
+        statusCode:payload
       };
     case EDIT_VIDEO_SUCCESS:
       const { page, Data } = payload;
@@ -293,7 +295,8 @@ export const getVideo = (obj) => (dispatch) => {
       dispatch({ type: GET_VIDEO_SUCCESS, payload: res.data });
     })
     .catch((err) => {
-      dispatch({ type: GET_VIDEO_FAILURE });
+      const statusCode = err.response ? err.response.status : 500;
+      dispatch({ type: GET_VIDEO_FAILURE,error:err  });
     });
 };
 

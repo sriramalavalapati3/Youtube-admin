@@ -4,6 +4,7 @@ import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Card from '../Cards';
 import './Container.css'
+import ErrorBoundary from '../ErrorBoundary';
 
  class Dashboard extends Component {
   constructor(props) {
@@ -205,6 +206,7 @@ render() {
       {Videos.length !== 0 && Videos.map((video) => (
         <Card key={video._id} element={video} page={page} />
       ))}
+      
       <div className="load-more-container">
         <button className="load-more-button" onClick={this.handleNextPage}>
           Load More
@@ -212,6 +214,7 @@ render() {
       </div>
       <ToastContainer position="bottom-right" />
     </div>
+    
   )
 }
 

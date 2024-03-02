@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "cross-env NODE_ENV=test mocha",
-    "start": "cross-env NODE_ENV=dev nodemon src/index.js"
+    "start": "cross-env NODE_ENV=dev src/index.js"
   },
   "keywords": [],
   "author": "",

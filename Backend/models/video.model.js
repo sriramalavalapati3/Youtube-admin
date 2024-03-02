@@ -1,5 +1,5 @@
 const mongoose=require("mongoose");
-const {connection}=require("../config/config")
+const { connection } = require("../config/config");
 
 const videoSchema=mongoose.Schema({
     "Title":{
@@ -20,6 +20,6 @@ const videoSchema=mongoose.Schema({
     timestamps: true
  })
 
-const videomodel=connection.model("video",videoSchema)
+const videomodel=mongoose.model("video",videoSchema)
 
 module.exports={videomodel}

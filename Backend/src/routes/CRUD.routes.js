@@ -36,7 +36,7 @@ appRoute.delete("/delete",handleDelete );
 
 //get data
 
-appRoute.get("/data", );
+appRoute.get("/data",handleGetData );
 
 // get data by id
 

@@ -138,7 +138,9 @@ const register = async function (obj) {
         password: hashedPassword,
       });
       await data.save();
+      console.log('hi')
       return { msg: true, Data: data };
+
     } else {
       return { msg: false, message: "error in hashing" };
     }

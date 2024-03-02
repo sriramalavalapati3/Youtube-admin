@@ -20,6 +20,6 @@ const adminSchema = mongoose.Schema(
   }
 );
 
-const Adminmodel = connection.model("Admin", adminSchema);
+const Adminmodel = mongoose.model("Admin", adminSchema);
 
 module.exports = { Adminmodel };

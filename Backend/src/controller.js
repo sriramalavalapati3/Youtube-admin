@@ -19,7 +19,7 @@ const handleRegister=async (req, res) => {
       }
   
       let data = await register(req.body);
-      if (data.msg) {
+      if (!data.msg) {
         return res.status(500).send({ msg: data });
       }
       res.status(200).send({ msg: "registered successfully" });
